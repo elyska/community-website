@@ -6,8 +6,8 @@ import { compare, genSalt, hash } from 'https://deno.land/x/bcrypt@v0.2.4/mod.ts
 import { db } from './db.js'
 
 const saltRounds = 10
-const salt = await genSalt(saltRounds)
-
+const salt = await genSalt(saltRounds)                                                                  
+                                                                                                       
 export async function login(data) {
 	console.log(data)
 	let sql = `SELECT count(id) AS count FROM accounts WHERE user="${data.username}";`

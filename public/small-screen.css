@@ -1,0 +1,221 @@
+
+@font-face {
+    font-family: Crete;
+    src: url("./uploads/CreteRound-Regular.ttf");
+}
+
+body {
+    background-color: var(--background);
+    margin: 0;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    color: var(--typeface);
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h1, h2, h3 {
+    font-family: Crete, Arial, Helvetica, sans-serif;
+}
+
+figure {
+    margin: 0;
+}
+
+
+
+nav {
+    width: 100%;
+    background-color: var(--primary);
+    margin: 0;
+    overflow: hidden;
+}
+
+nav ul {
+    margin: auto;
+    width: 80%;
+    list-style-type: none;
+}
+
+nav li a {
+    color: var(--typeface);
+    text-decoration: None;
+}
+
+nav ul li:first-child {
+    font-family: Crete, Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    padding-top: 10px;
+    float: left;
+}
+
+nav ul li:not(li:first-child) {
+    font-size: 20px;
+    padding-top: 20px;
+    margin: auto;
+}
+
+nav figure img{
+    width: 35px;
+}
+
+nav figure img:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+nav li:nth-child(2):hover ~ li{
+    display: block;
+}
+
+nav li:nth-child(2):active{
+}
+
+nav li:nth-child(2) ~ li{
+    display: none;
+}
+
+@keyframes toggle {
+    0% {position: absolute; top: -100px;}
+    100% {position: static;}
+}
+
+/* Menu Icon */
+nav li:nth-child(2), nav li:nth-child(3){
+    float: right;
+}
+/* Close Icon */
+nav li:nth-child(3) {
+    display: none;
+}
+
+
+
+nav li:nth-child(4), nav li:nth-child(5) {
+    clear: both;
+    text-align: center;
+}
+
+
+main {
+    width: 85%;
+    margin: auto;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background: var(--typeface);
+    color: var(--background);
+    height: 40px;
+}
+
+footer p {
+    padding: 10px;
+}
+
+
+/*********** HOME PAGE ***********/
+main section {
+    margin: auto;
+}
+
+main section:first-child {
+    text-align: center;
+}
+
+h1~p {
+    font-size: 20px;
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+main img {
+    display: none;
+}
+
+button{
+    background-color: var(--secondary);
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    border: 3px solid var(--typeface);
+    color: var(--typeface);
+    font-size: 25px;
+    box-shadow: 2px 5px 10px grey;
+    font-family: Crete;
+}
+
+button:hover{
+    background-color: var(--secondary-variant);/*#82f0ff;*/
+    cursor: pointer;
+}
+/* cards */
+main h2 {
+    clear: both;
+    text-align: center;
+    margin-top: 30px;
+}
+
+figure~section{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+main section article{
+    width: 150px;
+    height: 200px;
+    box-shadow: 0px 0px 10px lightgrey;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+}
+
+main section article:hover{
+    width: 150px;
+    height: 200px;
+    box-shadow: 0px 0px 10px lightgrey;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+img[alt="Arrow"] {
+    border: 4px solid var(--primary-variant);
+    border-radius: 100%;
+    width: 40px;
+}
+
+article figure figcaption{
+    /*float: right;*/
+}
+
+
+figcaption {
+    display: inline-block;
+    padding: 10px;
+}
+
+article figure img{
+    width: 35px;
+    margin: 0;
+    float: left;
+    display: inline-block;
+}
+
+article figure {
+    margin-bottom: 20px;
+}
+
+
+
+

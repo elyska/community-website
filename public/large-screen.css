@@ -1,0 +1,37 @@
+
+h1 {
+    font-size: 3vw;/*45px;*/
+}
+
+h2 {
+    font-size: 2vw;/*30px;*/
+}
+
+main {
+    width: 70%;
+}
+
+
+/*********** HOME PAGE ***********/
+
+main section:first-child {
+    float: left;
+    max-width: 50%;
+}
+
+h1~p {
+    font-size: 20px;
+}
+
+main img {
+    width: 40%;
+    float: right;
+    margin-top: 20px;
+    margin-bottom: -50px;
+    display: block;
+}
+
+
+
+
+

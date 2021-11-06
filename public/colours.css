@@ -1,0 +1,11 @@
+
+/* code based on https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties*/
+:root {
+    --primary: #ffe706;
+    --primary-variant: #ffc408;
+    --secondary: #08c6db;
+    --secondary-variant: #07b3c6;
+    --background: #fff8f8;
+    --typeface: #302020;
+}
+/*end of code based on https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties*/

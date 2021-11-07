@@ -4,6 +4,6 @@
 
 @import url(./small-screen.css);
 
-@import url(./medium-screen.css)(min-width: 700px);
+@import url(./medium-screen.css)(min-width: 800px);
 
 @import url(./large-screen.css) (min-width: 950px);

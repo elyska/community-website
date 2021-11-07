@@ -11,52 +11,55 @@ nav {
     width: 100%;
     margin: 0;
     overflow: hidden;
-    box-shadow: 0px 3px 20px -5px lightgrey;
 }
 
 nav li:nth-child(2), nav li:nth-child(3) {
-    display: none;
+    display: none !important;
 }
 
 nav li:nth-child(3) ~ li{
-    display: block;
+    display: block !important;
 }
 
 nav ul {
     margin: auto;
     width: 80%;
+    /*
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;*/
+        
 }
 
 nav ul li:first-child {
     font-family: Crete, Arial, Helvetica, sans-serif;
     font-size: 25px;
     padding-top: 10px;
-    float: left;
     color: var(--primary);
+    float: left;
 }
 
 
 nav ul li:not(li:first-child) {
-    position: static;
     clear: none;
     padding: 30px;
     font-size: 20px;
     float: right;
 }
 
-nav li{
-    display: inline-block;
-}
 
 nav li a {
     text-decoration: None;
     padding-bottom: 5px;
 }
 
-nav li:not(nav li:first-child) a:hover{
-    color: var(--primary);
-    
+nav li a img{
+    padding-right: 10px;
+    float: left;
+    display: inline-block;
 }
+
+
 
 nav li:not(nav li:first-child) a:hover img{
     opacity: 0.6;

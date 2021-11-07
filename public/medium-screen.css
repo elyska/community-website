@@ -9,9 +9,9 @@ h2 {
 
 nav {
     width: 100%;
-    background-color: var(--primary);
     margin: 0;
     overflow: hidden;
+    box-shadow: 0px 3px 20px -5px lightgrey;
 }
 
 nav li:nth-child(2), nav li:nth-child(3) {
@@ -32,7 +32,9 @@ nav ul li:first-child {
     font-size: 25px;
     padding-top: 10px;
     float: left;
+    color: var(--primary);
 }
+
 
 nav ul li:not(li:first-child) {
     position: static;
@@ -47,15 +49,19 @@ nav li{
 }
 
 nav li a {
-    color: black;
     text-decoration: None;
     padding-bottom: 5px;
 }
-nav li a:hover { /*animate!!!*/
-    /*text-decoration: underline;
-    text-decoration-style: wavy;*/
-    border-bottom: 6px solid var(--primary-variant);/*#ffc408;*/
+
+nav li:not(nav li:first-child) a:hover{
+    color: var(--primary);
+    
 }
+
+nav li:not(nav li:first-child) a:hover img{
+    opacity: 0.6;
+}
+
 
 main {
     width: 80%;

@@ -8,7 +8,7 @@ h2 {
 }
 
 main {
-    width: 70%;
+    width: 75%;
 }
 
 
@@ -23,12 +23,12 @@ h1~p {
     font-size: 20px;
 }
 
-main img {
+img[src*="tree"] {
     width: 40%;
     float: right;
-    margin-top: 20px;
-    margin-bottom: -50px;
+    margin-bottom: -80px;
     display: block;
+    margin-top: 20px;
 }
 
 

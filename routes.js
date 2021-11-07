@@ -6,9 +6,11 @@ import { Handlebars } from 'https://deno.land/x/handlebars/mod.ts'
 // import { upload } from 'https://cdn.deno.land/oak_upload_middleware/versions/v2/raw/mod.ts'
 // import { parse } from 'https://deno.land/std/flags/mod.ts'
 
+
 import { login, register } from './modules/accounts.js'
 
-const handle = new Handlebars({ defaultLayout: '' })
+//const handle = new Handlebars({ defaultLayout: '' })
+const handle = new Handlebars()
 
 const router = new Router()
 

@@ -27,11 +27,9 @@ figure {
     margin: 0;
 }
 
-
-
 nav {
     width: 100%;
-    background-color: var(--primary);
+    background-color: var(--background-lighter-variant);
     margin: 0;
     overflow: hidden;
 }
@@ -60,11 +58,17 @@ nav ul li:not(li:first-child) {
     margin: auto;
 }
 
+nav li a img{
+    padding-right: 10px;
+    float: left;
+    display: inline-block;
+}
+
 nav figure img{
     width: 35px;
 }
 
-nav figure img:hover{
+nav img:hover{
     opacity: 0.6;
     cursor: pointer;
 }
@@ -95,7 +99,6 @@ nav li:nth-child(3) {
 }
 
 
-
 nav li:nth-child(4), nav li:nth-child(5) {
     clear: both;
     text-align: center;
@@ -121,6 +124,7 @@ footer p {
 
 
 /*********** HOME PAGE ***********/
+
 main section {
     margin: auto;
 }
@@ -135,9 +139,10 @@ h1~p {
     margin-bottom: 30px;
 }
 
-main img {
+img[src*="tree"] {
     display: none;
 }
+
 
 button{
     background-color: var(--secondary);
@@ -150,10 +155,17 @@ button{
     font-size: 25px;
     box-shadow: 2px 5px 10px grey;
     font-family: Crete;
+    width: 200px;
+}
+
+button img {
+    margin: 0;
+    width: 30px;
+    float: left;
 }
 
 button:hover{
-    background-color: var(--secondary-variant);/*#82f0ff;*/
+    background-color: var(--secondary-variant);
     cursor: pointer;
 }
 /* cards */
@@ -166,26 +178,21 @@ main h2 {
 figure~section{
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     justify-content: center;
 }
 
 main section article{
-    width: 150px;
+    background-color: var(--background-lighter-variant);
+    width: 20%;
+    min-width: 150px;
     height: 200px;
     box-shadow: 0px 0px 10px lightgrey;
     border-radius: 10px;
-    margin: 10px;
+    margin: 20px;
     padding: 20px;
 }
 
 main section article:hover{
-    width: 150px;
-    height: 200px;
-    box-shadow: 0px 0px 10px lightgrey;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 20px;
     cursor: pointer;
 }
 

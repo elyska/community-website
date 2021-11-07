@@ -17,13 +17,18 @@ const router = new Router()
 // the routes defined here
 router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
-	const data = { authorised }
+	if(authorised === undefined) context.response.redirect('/login')
+    const nav = true
+	const data = { authorised, nav }
 	const body = await handle.renderView('home', data)
 	context.response.body = body
 })
 
+
 router.get('/login', async context => {
-	const body = await handle.renderView('login')
+    const nav = false
+    const data = { nav }
+	const body = await handle.renderView('login', data)
 	context.response.body = body
 })
 
@@ -45,7 +50,7 @@ router.post('/register', async context => {
 router.get('/logout', context => {
   // context.cookies.set('authorised', null) // this does the same
   context.cookies.delete('authorised')
-  context.response.redirect('/')
+  context.response.redirect('/login')
 })
 
 router.post('/login', async context => {
@@ -57,19 +62,13 @@ router.post('/login', async context => {
 	try {
 		const username = await login(obj)
 		context.cookies.set('authorised', username)
-		context.response.redirect('/foo')
+		context.response.redirect('/')
 	} catch(err) {
 		console.log(err)
 		context.response.redirect('/login')
 	}
 })
 
-router.get('/foo', async context => {
-	const authorised = context.cookies.get('authorised')
-	if(authorised === undefined) context.response.redirect('/')
-	const data = { authorised }
-	const body = await handle.renderView('foo', data)
-	context.response.body = body
-})
+
 
 export default router

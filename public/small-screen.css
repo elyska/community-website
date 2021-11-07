@@ -168,8 +168,8 @@ button{
     padding: 10px;
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 10px;
-    border: 3px solid var(--typeface);
+    border-radius: 7px;
+    border: 2px solid var(--typeface);
     color: var(--typeface);
     font-size: 25px;
     box-shadow: 2px 5px 10px grey;
@@ -242,6 +242,75 @@ article figure {
     margin-bottom: 20px;
 }
 
+/********** LOGIN, REGISTER PAGE **********/
+main > p {
+    text-align: center;
+    font-size: 25px;
+    font-family: Crete, Arial, Helvetica, sans-serif;
+    margin: 50px;
+}
 
+main > h1 {
+    text-align: center;
+}
+
+form[action*="login"],  form[action*="register"]{
+    text-align: center;
+}
+
+form p {
+    font-size: 15px;
+}
+
+input {
+    padding: 15px;
+    padding-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--background-lighter-variant);
+    margin: 10px;
+    width: 250px;
+    border: 1px solid var(--background-darker-variant);
+    border-radius: 3px;
+}
+
+input:focus {
+    outline: 2px solid var(--primary);
+}
+
+input[type="submit"] {
+    outline: none;
+    background-color: var(--secondary);
+    border-radius: 7px;
+    border: 2px solid var(--typeface);
+    color: var(--typeface);
+    font-size: 20px;
+    box-shadow: 2px 5px 10px grey;
+    font-family: Crete, Arial, Helvetica, sans-serif;
+    width: 180px;
+    margin: 0;
+}
+
+input[type="submit"]:hover{
+    background-color: var(--secondary-variant);
+    cursor: pointer;
+}
+
+form p:last-child {
+    width: 280px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+form p:last-child a {
+    padding-top: 20px;
+    color: var(--typeface);
+    font-size: 17px;
+}
+
+form p:last-child a:hover {
+    text-decoration: none;
+}
 
 

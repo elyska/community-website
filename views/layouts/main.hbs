@@ -1,6 +1,13 @@
+
+{{! code from https://github.com/alosaur/handlebars/tree/master/example}}
 {{> head }}
+
+{{#if nav}}
+    {{> nav }}
+{{/if}}
 
 {{{ body }}}
 
-{{> foot }}
-<!-- code from https://github.com/alosaur/handlebars/tree/master/example -->
+{{#if nav}}
+    {{> foot }}
+{{/if}}

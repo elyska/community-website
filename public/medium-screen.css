@@ -88,6 +88,10 @@ main section article{
     transition: transform 0.3s;
 }
 
+/********** LOGIN PAGE **********/
+main > figure {
+    /*display: block;*/
+}
 
 
 

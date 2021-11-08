@@ -11,14 +11,19 @@ main {
     width: 75%;
 }
 
-
+footer { 
+    
+}
 /*********** HOME PAGE ***********/
 
-main section:first-child {
+main article:first-child section {
     float: left;
     max-width: 50%;
 }
-
+main article:last-child section {
+    clear: both;
+    max-width: 100%;
+}
 h1~p {
     font-size: 20px;
 }
@@ -26,9 +31,10 @@ h1~p {
 img[src*="tree"] {
     width: 40%;
     float: right;
-    margin-bottom: -80px;
+    margin-bottom: -90px;
     display: block;
-    margin-top: 20px;
+    min-height: 450px;
+    max-height: 500px;
 }
 
 

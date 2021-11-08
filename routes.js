@@ -19,21 +19,39 @@ router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const nav = true
-	const data = { authorised, nav }
+	const data = { authorised, nav, title: "Home" }
 	const body = await handle.renderView('home', data)
+	context.response.body = body
+})
+
+router.get('/myissues', async context => {
+	const authorised = context.cookies.get('authorised')
+	if(authorised === undefined) context.response.redirect('/login')
+    const nav = true
+	const data = { authorised, nav, title: "My Issues" }
+	const body = await handle.renderView('my-issues', data)
+	context.response.body = body
+})
+
+router.get('/addissue', async context => {
+	const authorised = context.cookies.get('authorised')
+	if(authorised === undefined) context.response.redirect('/login')
+    const nav = true
+	const data = { authorised, nav, title: "Add Issue" }
+	const body = await handle.renderView('add-issue', data)
 	context.response.body = body
 })
 
 
 router.get('/login', async context => {
-    const nav = false
-    const data = { nav }
+    const data = { title: "Log In" }
 	const body = await handle.renderView('login', data)
 	context.response.body = body
 })
 
 router.get('/register', async context => {
-	const body = await handle.renderView('register')
+    const data = { title: "Register" }
+	const body = await handle.renderView('register', data)
 	context.response.body = body
 })
 
@@ -55,6 +73,22 @@ router.get('/logout', context => {
 
 router.post('/login', async context => {
 	console.log('POST /login')
+	const body = context.request.body({ type: 'form' })
+	const value = await body.value
+	const obj = Object.fromEntries(value)
+	console.log(obj)
+	try {
+		const username = await login(obj)
+		context.cookies.set('authorised', username)
+		context.response.redirect('/')
+	} catch(err) {
+		console.log(err)
+		context.response.redirect('/login')
+	}
+})
+
+router.post('/add', async context => {
+	console.log('POST /add')
 	const body = context.request.body({ type: 'form' })
 	const value = await body.value
 	const obj = Object.fromEntries(value)

@@ -42,10 +42,12 @@ nav ul li:first-child {
 
 nav ul li:not(li:first-child) {
     clear: none;
-    padding: 30px;
+    padding-left: 30px;
+    padding-top: 30px;
     font-size: 20px;
     float: right;
 }
+
 
 
 nav li a {
@@ -72,7 +74,7 @@ main {
 
 /*********** HOME PAGE ***********/
 
-main section {
+main article {
     margin-bottom: 30px;
 }
 
@@ -80,18 +82,15 @@ h1~p {
     font-size: 2.5vw;
 }
 
-main section article:hover{
+main article ul:hover{
     transform: translate(0, -3%);
 }
 
-main section article{
+main article ul{
     transition: transform 0.3s;
 }
 
-/********** LOGIN PAGE **********/
-main > figure {
-    /*display: block;*/
-}
+
 
 
 

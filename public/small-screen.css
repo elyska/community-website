@@ -21,6 +21,7 @@ h2 {
 
 h1, h2, h3 {
     font-family: Crete, Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
 figure {
@@ -30,6 +31,8 @@ figure {
 main {
     width: 85%;
     margin: auto;
+    margin-top: 30px;
+    margin-bottom: 60px;
 }
 
 footer {
@@ -42,6 +45,7 @@ footer {
 
 footer p {
     padding: 10px;
+    margin: 0;
 }
 
 /* mobile navigation bar */
@@ -106,23 +110,6 @@ nav li:not(nav li:first-child) a:hover{
 nav li:nth-child(3) ~ li{
     display: none;
 }
-/*
-nav li:nth-child(2):hover ~ li{
-    display: block;
-}
-/*
-
-
-nav li:nth-child(2):active{
-}
-
-
-
-@keyframes toggle {
-    0% {position: absolute; top: -100px;}
-    100% {position: static;}
-}
-*/
 
 /* Menu Icon */
 nav li:nth-child(2), nav li:nth-child(3){
@@ -139,15 +126,20 @@ nav li:nth-child(4), nav li:nth-child(5), nav li:nth-child(6) {
 }
 
 
-
-
-
 /*********** HOME PAGE ***********/
-
-main section {
+/*
+main article {
     margin: auto;
+}*/
+
+main h1{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
+main h2{
+    margin-bottom: 20px;
+}
 main section:first-child {
     text-align: center;
 }
@@ -163,11 +155,10 @@ img[src*="tree"] {
 }
 
 
-button{
+a[href*="add"]{
+    text-decoration: none;
     background-color: var(--secondary);
     padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
     border-radius: 7px;
     border: 2px solid var(--typeface);
     color: var(--typeface);
@@ -175,15 +166,17 @@ button{
     box-shadow: 2px 5px 10px grey;
     font-family: Crete;
     width: 200px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
 }
 
-button img {
-    margin: 0;
+a[href*="add"] img {
+    padding-right: 10px;
     width: 30px;
-    float: left;
 }
 
-button:hover{
+a[href*="add"]:hover{
     background-color: var(--secondary-variant);
     cursor: pointer;
 }
@@ -194,6 +187,59 @@ main h2 {
     margin-top: 30px;
 }
 
+main article:last-child section{
+    clear: both;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+main article:last-child ul {
+    background-color: var(--background-lighter-variant);
+    width: 20%;
+    min-width: 200px;
+    height: 200px;
+    box-shadow: 0px 0px 10px lightgrey;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;   
+}
+
+main article:last-child ul {
+    cursor: pointer;
+}
+main ul li {
+    text-align: left;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+main ul li:first-child {
+    list-style-type: none;
+    font-family: Crete;
+    font-size: 20px;
+}
+
+main ul li:not(:first-child) {
+    list-style-image: url(uploads/location.svg);
+    list-style-position: outside;
+}
+
+main ul li:last-child {
+    list-style-image: url(uploads/calendar.svg);
+    list-style-position: outside;
+}
+/*
+main ul li:last-child:before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url(uploads/calendar.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 10px;
+}
+/*
 figure~section{
     display: flex;
     flex-wrap: wrap;
@@ -221,11 +267,6 @@ img[alt="Arrow"] {
     width: 40px;
 }
 
-article figure figcaption{
-    /*float: right;*/
-}
-
-
 figcaption {
     display: inline-block;
     padding: 10px;
@@ -241,7 +282,7 @@ article figure img{
 article figure {
     margin-bottom: 20px;
 }
-
+*/
 /********** LOGIN, REGISTER PAGE **********/
 main > p {
     text-align: center;
@@ -254,7 +295,7 @@ main > h1 {
     text-align: center;
 }
 
-form[action*="login"],  form[action*="register"]{
+form[action*="login"],  form[action*="register"] {
     text-align: center;
 }
 
@@ -262,7 +303,7 @@ form p {
     font-size: 15px;
 }
 
-input {
+input, textarea {
     padding: 15px;
     padding-left: 10px;
     font-size: 15px;
@@ -274,7 +315,7 @@ input {
     border-radius: 3px;
 }
 
-input:focus {
+input:focus, textarea:focus {
     outline: 2px solid var(--primary);
 }
 
@@ -312,5 +353,25 @@ form p:last-child a {
 form p:last-child a:hover {
     text-decoration: none;
 }
+/********** ADD ISSUE **********/
+form[action*="add"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 
+form[action*="add"] input, textarea{
+    font-weight: normal;
+    width: 100%;
+    margin-left: 0;
+}
+
+textarea {
+    font-family: Roboto;
+}
+
+form[action*="add"] p:last-child{
+    margin: 0;
+    width: 150px;
+}
 

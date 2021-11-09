@@ -1,9 +1,12 @@
 
-
+/* Colour Palette */
 @import url(./colours.css);
 
+/* Layout for small screens */
 @import url(./small-screen.css);
 
+/* Layout for medium screens */
 @import url(./medium-screen.css)(min-width: 800px);
 
+/* Layout for large screens */
 @import url(./large-screen.css) (min-width: 950px);

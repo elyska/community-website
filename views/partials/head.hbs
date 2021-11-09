@@ -6,7 +6,9 @@
 		<title>{{title}}</title>
 		<meta name="description" content="form to add new books">
 		<meta name="author" content="Mark Tyers">
-		<link href="/style.css" type="text/css" rel="stylesheet" />
+        {{#each style}}
+            <link href="/{{this}}.css" type="text/css" rel="stylesheet" />
+        {{/each}}
 		<script type="module" src="/main.js"></script>
 	</head>
 	<body>

@@ -42,7 +42,7 @@ nav ul li:first-child {
 
 nav ul li:not(li:first-child) {
     clear: none;
-    padding-left: 30px;
+    padding-left: 50px;
     padding-top: 30px;
     font-size: 20px;
     float: right;

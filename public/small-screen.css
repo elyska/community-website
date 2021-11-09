@@ -47,6 +47,20 @@ footer p {
     padding: 10px;
     margin: 0;
 }
+/* buttons */
+a[href*="add"], input[type="submit"], a[href*="fix"] {
+    background-color: var(--secondary);
+    box-shadow: 2px 5px 10px grey;
+    border: 2px solid var(--typeface);
+    color: var(--typeface);
+    font-family: Crete, Arial, Helvetica, sans-serif;
+    border-radius: 7px;  
+}
+
+input[type="submit"]:hover, a[href*="add"]:hover{
+    background-color: var(--secondary-variant);
+    cursor: pointer;
+}
 
 /* mobile navigation bar */
 nav {
@@ -153,29 +167,20 @@ img[src*="tree"] {
 
 a[href*="add"]{
     text-decoration: none;
-    background-color: var(--secondary);
     padding: 10px;
-    border-radius: 7px;
-    border: 2px solid var(--typeface);
-    color: var(--typeface);
     font-size: 25px;
-    box-shadow: 2px 5px 10px grey;
-    font-family: Crete;
     width: 200px;
     display: flex;
     justify-content: center;
     margin: auto;
 }
 
+
 a[href*="add"] img {
     padding-right: 10px;
     width: 30px;
 }
 
-a[href*="add"]:hover{
-    background-color: var(--secondary-variant);
-    cursor: pointer;
-}
 /* cards */
 main h2 {
     clear: both;
@@ -275,23 +280,15 @@ input:focus, textarea:focus {
     outline: 2px solid var(--primary);
 }
 
+
 input[type="submit"] {
-    outline: none;
-    background-color: var(--secondary);
-    border-radius: 7px;
-    border: 2px solid var(--typeface);
-    color: var(--typeface);
+    outline: none;  
     font-size: 20px;
-    box-shadow: 2px 5px 10px grey;
-    font-family: Crete, Arial, Helvetica, sans-serif;
     width: 180px;
     margin: 0;
 }
 
-input[type="submit"]:hover{
-    background-color: var(--secondary-variant);
-    cursor: pointer;
-}
+
 
 form p:last-child {
     width: 280px;

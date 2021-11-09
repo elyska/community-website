@@ -19,7 +19,7 @@ router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const nav = true
-	const data = { authorised, nav, title: "Home" }
+	const data = { authorised, nav, title: "Home", style: ["style"] }
 	const body = await handle.renderView('home', data)
 	context.response.body = body
 })
@@ -28,7 +28,7 @@ router.get('/myissues', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const nav = true
-	const data = { authorised, nav, title: "My Issues" }
+	const data = { authorised, nav, title: "My Issues", style: ["style"] }
 	const body = await handle.renderView('my-issues', data)
 	context.response.body = body
 })
@@ -37,8 +37,17 @@ router.get('/addissue', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const nav = true
-	const data = { authorised, nav, title: "Add Issue" }
+	const data = { authorised, nav, title: "Add Issue", style: ["style"] }
 	const body = await handle.renderView('add-issue', data)
+	context.response.body = body
+})
+
+router.get('/issue', async context => {
+	const authorised = context.cookies.get('authorised')
+	if(authorised === undefined) context.response.redirect('/login')
+    const nav = true
+	const data = { authorised, nav, title: "Add Issue", style: ["style", "issue"] }
+	const body = await handle.renderView('issue-detail', data)
 	context.response.body = body
 })
 
@@ -47,7 +56,7 @@ router.get('/login', async context => {
     const url = context.request.url
     //code based on https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
     const searchParams = new URLSearchParams(url.search)
-    const data = { username: searchParams.get("username"), title: "Log In"}
+    const data = { username: searchParams.get("username"), title: "Log In", style: ["style"]}
     //end of code based on https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
     console.log(data)
 	const body = await handle.renderView('login', data)
@@ -55,7 +64,7 @@ router.get('/login', async context => {
 })
 
 router.get('/register', async context => {
-    const data = { title: "Register" }
+    const data = { title: "Register", style: ["style"] }
 	const body = await handle.renderView('register', data)
 	context.response.body = body
 })
@@ -94,10 +103,17 @@ router.post('/login', async context => {
 
 router.post('/add', async context => {
 	console.log('POST /add')
-	const body = context.request.body({ type: 'form' })
-	const value = await body.value
-	const obj = Object.fromEntries(value)
-	console.log(obj)
+	const body = await context.request.body({ type: 'form-data', maxSize: 5000000 })
+	const value = await body.value.read()
+	console.log(JSON.stringify(value, null, 2))
+    console.log(value)
+    //const fields = value.fields
+    const file = value.files[0]
+    const { originalName, filename } = file
+    const user = context.cookies.get("authorised") //get username to append to the file name
+    await Deno.rename(filename, `${Deno.cwd()}/public/uploads/${user}-${originalName}`)
+	//const obj = Object.fromEntries(value)
+	//console.log(obj)
 	context.response.redirect('/')
 })
 

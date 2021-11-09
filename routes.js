@@ -93,14 +93,7 @@ router.post('/add', async context => {
 	const value = await body.value
 	const obj = Object.fromEntries(value)
 	console.log(obj)
-	try {
-		const username = await login(obj)
-		context.cookies.set('authorised', username)
-		context.response.redirect('/')
-	} catch(err) {
-		console.log(err)
-		context.response.redirect('/login')
-	}
+	context.response.redirect('/')
 })
 
 

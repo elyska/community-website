@@ -44,7 +44,12 @@ router.get('/addissue', async context => {
 
 
 router.get('/login', async context => {
-    const data = { title: "Log In" }
+    const url = context.request.url
+    //code based on https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+    const searchParams = new URLSearchParams(url.search)
+    const data = { username: searchParams.get("username"), title: "Log In"}
+    //end of code based on https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+    console.log(data)
 	const body = await handle.renderView('login', data)
 	context.response.body = body
 })
@@ -83,7 +88,7 @@ router.post('/login', async context => {
 		context.response.redirect('/')
 	} catch(err) {
 		console.log(err)
-		context.response.redirect('/login')
+		context.response.redirect(`/login?username=${obj.username}`)
 	}
 })
 

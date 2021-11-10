@@ -15,39 +15,22 @@
     
     <h2>New Issues</h2>
     <article>
-            <section>
+        {{#each issues}}
+        <a href="/issues/{{id}}">
+        <section>
                 <figure>
-                    <img src="/uploads/placeholder.png" alt="Issue Image" />
+                    <img src="/uploads/{{photo}}" alt="Issue Image" />
                 </figure>
                  <ul>
-                    <li>Issue Title</li>
-                    <li> Location Description</li>
-                    <li>01/01/2021</li>
+                    <li>{{title}}</li>
+                    <li>{{location}}</li>
+                    <li>{{convertDate currdate}}</li>
                  </ul>
             </section>
-                 
-            <section>
-                <figure>
-                    <img src="/uploads/placeholder.png" alt="Issue Image" />
-                </figure>
-                 <ul>
-                    <li>Issue Title</li>
-                    <li> Location Description Location Description Location Description</li>
-                    <li>01/01/2021</li>
-                 </ul>
-            </section>
-                 
-            <section>
-                <figure>
-                    <img src="/uploads/placeholder.png" alt="Issue Image" />
-                </figure>
-                 <ul>
-                    <li>Issue Title</li>
-                    <li> Location Description Location Description Location Description</li>
-                    <li>01/01/2021</li>
-                 </ul>
-            </section>
-                 
+        </a>
+            
+        {{/each}}
+              <!--   
             <section>
                 <figure>
                     <img src="/uploads/placeholder.png" alt="Issue Image" />
@@ -80,6 +63,28 @@
                     <li>01/01/2021</li>
                  </ul>
             </section>
+                 
+            <section>
+                <figure>
+                    <img src="/uploads/placeholder.png" alt="Issue Image" />
+                </figure>
+                 <ul>
+                    <li>Issue Title</li>
+                    <li> Location Description Location Description Location Description</li>
+                    <li>01/01/2021</li>
+                 </ul>
+            </section>
+                 
+            <section>
+                <figure>
+                    <img src="/uploads/placeholder.png" alt="Issue Image" />
+                </figure>
+                 <ul>
+                    <li>Issue Title</li>
+                    <li> Location Description Location Description Location Description</li>
+                    <li>01/01/2021</li>
+                 </ul>
+            </section>-->
                 
     </article>
            

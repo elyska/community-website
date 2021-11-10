@@ -8,6 +8,7 @@ import { Handlebars } from 'https://deno.land/x/handlebars/mod.ts'
 
 
 import { login, register } from './modules/accounts.js'
+import { addIssue, getIssues, getMyIssues, getIssueDetail } from './modules/issues.js'
 
 //const handle = new Handlebars({ defaultLayout: '' })
 const handle = new Handlebars()
@@ -18,8 +19,10 @@ const router = new Router()
 router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
+    const issues = await getIssues()
+    console.log(issues)
     const nav = true
-	const data = { authorised, nav, title: "Home", style: ["style"] }
+	const data = { authorised, nav, title: "Home", style: ["style"], issues }
 	const body = await handle.renderView('home', data)
 	context.response.body = body
 })
@@ -27,8 +30,9 @@ router.get('/', async context => {
 router.get('/myissues', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
+    const issues = await getMyIssues(authorised)
     const nav = true
-	const data = { authorised, nav, title: "My Issues", style: ["style"] }
+	const data = { authorised, nav, title: "My Issues", style: ["style"], issues }
 	const body = await handle.renderView('my-issues', data)
 	context.response.body = body
 })
@@ -42,11 +46,15 @@ router.get('/addissue', async context => {
 	context.response.body = body
 })
 
-router.get('/issue', async context => {
+router.get('/issues/:id', async context => {
+    console.log("here")
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
+    const issue = await getIssueDetail(context.params.id)
+    if (issue.username === authorised) issue.isMine = true
+    console.log(issue)
     const nav = true
-	const data = { authorised, nav, title: "Add Issue", style: ["style", "issue"] }
+	const data = { authorised, nav, title: "Add Issue", style: ["style", "issue"], issue }
 	const body = await handle.renderView('issue-detail', data)
 	context.response.body = body
 })
@@ -105,15 +113,24 @@ router.post('/add', async context => {
 	console.log('POST /add')
 	const body = await context.request.body({ type: 'form-data', maxSize: 5000000 })
 	const value = await body.value.read()
-	console.log(JSON.stringify(value, null, 2))
     console.log(value)
+	//console.log(JSON.stringify(value, null, 2))
+    //console.log(value)
     //const fields = value.fields
+    let data = value.fields 
+    const user = context.cookies.get("authorised")
     const file = value.files[0]
     const { originalName, filename } = file
-    const user = context.cookies.get("authorised") //get username to append to the file name
-    await Deno.rename(filename, `${Deno.cwd()}/public/uploads/${user}-${originalName}`)
-	//const obj = Object.fromEntries(value)
-	//console.log(obj)
+    // set photo to uploaded image or placeholder
+    if (originalName != "") {
+        await Deno.rename(value.files[0].filename, `${Deno.cwd()}/public/uploads/${user}-${originalName}`)
+        data.photo = `${user}-${originalName}`
+    }
+    else 
+    {
+        data.photo = "placeholder.png"
+    }
+    await addIssue(user, data)
 	context.response.redirect('/')
 })
 

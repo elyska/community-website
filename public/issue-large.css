@@ -9,9 +9,12 @@ main figure {
 }
 
 section {
-    width: 50%;
+    width: 100%;
 }
 
+figure~section {
+    width: 50%;
+}
 
 p:first-of-type {
     font-size: 1vw !important;

@@ -47,6 +47,11 @@ footer p {
     padding: 10px;
     margin: 0;
 }
+
+a {
+    text-decoration: none;
+    color: var(--typeface);
+}
 /* buttons */
 a[href*="add"], input[type="submit"], a[href*="fix"] {
     background-color: var(--secondary);
@@ -84,7 +89,6 @@ nav ul {
 
 nav li a {
     color: var(--typeface);
-    text-decoration: None;
 }
 
 nav ul li:first-child {
@@ -156,7 +160,6 @@ main > article {
 
 h1~p {
     font-size: 20px;
-    margin: 0;
     margin-bottom: 30px;
 }
 
@@ -208,14 +211,15 @@ main article:last-child {
 
 main article:last-child section{
     background-color: var(--background-lighter-variant);
-    width: 40%;
-    min-width: 300px;
+    width: 30vw;
+    min-width: 200px;
     height: 400px;
     box-shadow: 0px 0px 10px lightgrey;
     border-radius: 10px;
     margin: 20px;
     cursor: pointer; 
     overflow: hidden;
+   /* overflow-wrap: break-word;*/
 }
 
 main article:last-child ul { 
@@ -226,7 +230,16 @@ main article:last-child ul {
 main ul li {
     text-align: left;
     margin-bottom: 15px;
-    margin-left: 20px;
+    overflow-wrap: break-word; /* to avoid overlaps if one long word entered by a user */
+}
+
+main figure~ul li {
+    /* code based on https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 3 dots to avoid overlaps if text does not fit element */
+    /* end of code based on https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow */
+    
 }
 main ul li:first-child {
     list-style-type: none;
@@ -236,12 +249,12 @@ main ul li:first-child {
 
 main ul li:not(:first-child) {
     list-style-image: url(uploads/location.svg);
-    list-style-position: outside;
+    list-style-position: inside;
 }
 
 main ul li:last-child {
     list-style-image: url(uploads/calendar.svg);
-    list-style-position: outside;
+    list-style-position: inside;
 }
 
 /********** LOGIN, REGISTER PAGE **********/
@@ -301,6 +314,7 @@ form p:last-child a {
     padding-top: 20px;
     color: var(--typeface);
     font-size: 17px;
+    text-decoration: underline;
 }
 
 form p:last-child a:hover {

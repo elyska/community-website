@@ -5,6 +5,8 @@
 
 import { file2DataURI } from './util.js'
 
+import { DistanceCalculator } from "https://deno.land/x/distancecalculator/distance-calculator.ts"
+
 window.addEventListener('DOMContentLoaded', () => {
 	console.log('DOMContentLoaded')
 })
@@ -28,5 +30,31 @@ closeIcon.addEventListener("click", () => {
         navItems.children[i].style.display = "none"
     }
 })
+
+/*
+const addButton = document.querySelector('form[action="/add"] input[type="submit"]')
+console.log(addButton)
+*/
+
+const form = document.querySelector('form[action="/add"]')
+const inputLatitude = document.querySelector('form[action="/add"] input[name="latitude"]')
+const inputLongitude = document.querySelector('form[action="/add"] input[name="longitude"]')
+
+/* https://www.w3schools.com/html/html5_geolocation.asp */
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude)
+  inputLatitude.value = position.coords.latitude
+  inputLongitude.value = position.coords.longitude
+        //form.append(`<input type="hidden" name="longitude" value="${position.coords.longitude}">`)
+        //form.append(`<input type="hidden" name="latitude" value="${position.coords.latitude}">`)
+}
+
+form.addEventListener("input", () => {
+    if (navigator.geolocation) {  
+        navigator.geolocation.getCurrentPosition(showPosition)
+    } 
+})
+
 
 

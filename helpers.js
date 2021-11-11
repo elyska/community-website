@@ -12,6 +12,7 @@ const convertDate = (date) => {
 }
 
 const equalsNew = (status) => {
+    console.log(status)
     if (status === "new") return true
     return false
 }
@@ -35,3 +36,4 @@ export const helpers = {
     equalsAddressed: equalsAddressed,
     markdownConverter: markdownConverter
 }
+

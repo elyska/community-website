@@ -20,7 +20,6 @@ router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const issues = await getIssues()
-    console.log(issues)
     const nav = true
 	const data = { authorised, nav, title: "Home", style: ["style"], issues }
 	const body = await handle.renderView('home', data)

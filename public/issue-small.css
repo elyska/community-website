@@ -70,6 +70,7 @@ input:hover {
 /* markdown text style */
 dl {
     font-size: 20px;
+    overflow-wrap: break-word;
 }
 dt {
     color: var(--primary);
@@ -80,6 +81,10 @@ dd {
     margin: 0;
     margin-top: 5px;
     margin-bottom: 20px;
+}
+
+dd p:first-of-type {
+    margin-top: 0;
 }
 
 dl h1, dl h2, dl h3 {

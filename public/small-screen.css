@@ -247,12 +247,12 @@ main ul li:first-child {
     font-size: 20px;
 }
 
-main ul li:not(:first-child) {
+main ul li:nth-of-type(2) {
     list-style-image: url(uploads/location.svg);
     list-style-position: inside;
 }
 
-main ul li:last-child {
+main ul li:nth-of-type(3) {
     list-style-image: url(uploads/calendar.svg);
     list-style-position: inside;
 }

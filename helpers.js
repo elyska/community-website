@@ -12,7 +12,6 @@ const convertDate = (date) => {
 }
 
 const equalsNew = (status) => {
-    console.log(status)
     if (status === "new") return true
     return false
 }
@@ -22,7 +21,7 @@ const equalsAddressed = (status) => {
     return false
 }
 
-const markdownConverter = (description) => {
+const convertMarkdown = (description) => {
     // code based on https://deno.land/x/markdown@v2.0.0
     const markup = Marked.parse(description)
     console.log(markup.content)
@@ -34,6 +33,6 @@ export const helpers = {
     convertDate: convertDate,
     equalsNew: equalsNew,
     equalsAddressed: equalsAddressed,
-    markdownConverter: markdownConverter
+    convertMarkdown: convertMarkdown
 }
 

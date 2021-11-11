@@ -8,7 +8,7 @@ import { Handlebars } from 'https://deno.land/x/handlebars/mod.ts'
 
 
 import { login, register } from './modules/accounts.js'
-import { addIssue, getIssues, getMyIssues, getIssueDetail, updateFlag } from './modules/issues.js'
+import { addIssue, getIssues, getMyIssues, getIssueDetail, updateFlag, newGetDistance } from './modules/issues.js'
 
 //const handle = new Handlebars({ defaultLayout: '' })
 const handle = new Handlebars()
@@ -20,6 +20,7 @@ router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const issues = await getIssues()
+    //console.log(issues)
     const nav = true
 	const data = { authorised, nav, title: "Home", style: ["style"], issues }
 	const body = await handle.renderView('home', data)
@@ -51,7 +52,7 @@ router.get('/issues/:id', async context => {
 	if(authorised === undefined) context.response.redirect('/login')
     const issue = await getIssueDetail(context.params.id)
     if (issue.username === authorised) issue.isMine = true
-    console.log(issue)
+    //console.log(issue)
     const nav = true
 	const data = { authorised, nav, title: "Add Issue", style: ["style", "issue"], issue }
 	const body = await handle.renderView('issue-detail', data)
@@ -96,6 +97,7 @@ router.post('/login', async context => {
 	console.log('POST /login')
 	const body = context.request.body({ type: 'form' })
 	const value = await body.value
+    console.log(value)
 	const obj = Object.fromEntries(value)
 	console.log(obj)
 	try {
@@ -126,6 +128,8 @@ router.post('/add', async context => {
     {
         data.photo = "placeholder.png"
     }
+    console.log("USER PASSED:")
+    console.log(user)
     await addIssue(user, data)
 	context.response.redirect('/')
 })
@@ -149,6 +153,15 @@ router.post('/fix-confirmed/:id', async context => {
     console.log(issueId)
     await updateFlag(issueId, "fixed")
     context.response.redirect(`/issues/${issueId}`)
+})
+
+router.post('/mainjs', async context => {
+    console.log('POST /mainjs')
+	const body = context.request.body({ type: 'json' })
+	const value = await body.value
+    console.log(value)
+    await newGetDistance(value)
+    context.response.redirect('/')
 })
 
 

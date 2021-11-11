@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS issues (
     currdate DATETIME DEFAULT CURRENT_TIMESTAMP,
     userid MEDIUMINT UNSIGNED NOT NULL,
     status VARCHAR(9) DEFAULT "new",
+    longitude DOUBLE(10, 7),
+    latitude DOUBLE(9, 7),
     FOREIGN KEY (userid) REFERENCES accounts(id)
 );
 

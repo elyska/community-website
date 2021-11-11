@@ -11,9 +11,7 @@
             <dt>Location</dt>
             <dd>{{issue.location}}</dd>
             <dt>Description</dt>
-            <dd><div>
-                {{{markdownConverter issue.description}}}
-                </div></dd>
+            <dd>{{{convertMarkdown issue.description}}}</dd>
         </dl>
         <p>{{issue.status}}</p> 
         {{#if (equalsAddressed issue.status)}}

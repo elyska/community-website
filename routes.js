@@ -8,7 +8,7 @@ import { Handlebars } from 'https://deno.land/x/handlebars/mod.ts'
 
 
 import { login, register } from './modules/accounts.js'
-import { addIssue, getIssues, getMyIssues, getIssueDetail, updateFlag, newGetDistance } from './modules/issues.js'
+import { addIssue, getIssues, getMyIssues, getIssueDetail, updateFlag, addDistances, getDistances } from './modules/issues.js'
 
 //const handle = new Handlebars({ defaultLayout: '' })
 const handle = new Handlebars()
@@ -19,8 +19,9 @@ const router = new Router()
 router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
+    //const issues = await getDistances(authorised)
     const issues = await getIssues()
-    //console.log(issues)
+    console.log(issues)
     const nav = true
 	const data = { authorised, nav, title: "Home", style: ["style"], issues }
 	const body = await handle.renderView('home', data)
@@ -157,12 +158,26 @@ router.post('/fix-confirmed/:id', async context => {
 
 router.post('/mainjs', async context => {
     console.log('POST /mainjs')
+	const user = context.cookies.get('authorised')
 	const body = context.request.body({ type: 'json' })
 	const value = await body.value
     console.log(value)
-    await newGetDistance(value)
+    let x = await addDistances(value, user)
+    console.log(x)
     context.response.redirect('/')
 })
+
+/*
+router.get('/mainjs', async context => {
+    console.log('GET /mainjs')
+	const authorised = context.cookies.get('authorised')
+	if(authorised === undefined) context.response.redirect('/login')
+    const issues = await getDistances(authorised)
+    const nav = true
+	const data = { authorised, nav, title: "Home", style: ["style"], issues }
+	const body = await handle.renderView('home', data)
+	context.response.body = body
+})*/
 
 
 export default router

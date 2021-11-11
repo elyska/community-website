@@ -5,8 +5,9 @@ GRANT INSERT, SELECT, UPDATE, DELETE ON website.* TO websiteuser;
 
 -- USE website;
 
-DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS distances;
 DROP TABLE IF EXISTS issues;
+DROP TABLE IF EXISTS accounts;
 
 CREATE TABLE IF NOT EXISTS accounts (
   id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -37,3 +38,13 @@ INSERT INTO issues(title, location, description, photo, userid)
     ("Issue Title 3", "Description of location 3", "Description", "placeholder.png", 1),
     ("Issue Title 4", "Description of location 4", "Description", "placeholder.png", 1),
     ("Issue Title 5", "Description of location 5", "Description", "placeholder.png", 1);
+    
+    
+CREATE TABLE IF NOT EXISTS distances (
+    issueid MEDIUMINT UNSIGNED NOT NULL,
+    userid MEDIUMINT UNSIGNED NOT NULL,
+    distance DOUBLE(10, 7),
+    PRIMARY KEY(issueid, userid),
+    FOREIGN KEY (userid) REFERENCES accounts(id),
+    FOREIGN KEY (issueid) REFERENCES issues(id)
+);

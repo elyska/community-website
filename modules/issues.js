@@ -5,8 +5,6 @@ import {db} from "./db.js"
 import { DistanceCalculator } from "https://deno.land/x/distancecalculator/distance-calculator.ts"
 
 export async function addIssue(user, data) {
-    console.log("USER RECEIVED:")
-    console.log(user)
     const userSql = `SELECT id FROM accounts WHERE user="${user}";`
     let userid = await db.query(userSql)
     userid = userid[0].id
@@ -53,17 +51,40 @@ export async function updateFlag(id, status) {
     return true
 }
 
-export async function newGetDistance(curr) {
+export async function addDistances(curr, username) {
+    //console.log(username)
+    const userSql = `SELECT id FROM accounts WHERE user="${username}";`
+    const userid = await db.query(userSql)
+    //console.log(userid)
+    
     const sql = `SELECT id, latitude, longitude FROM issues WHERE status="new";`
     const issues = await db.query(sql)
     for (const issue of issues) {
-        console.log(issue)
-        if (issue.latitude === null || issue.longitude === null) issue.distance = null
-        else {
-            const distance = DistanceCalculator.getDistanceInKilometers(curr.latitude, curr.longitude, issue.latitude, issue.longitude)
-            issue.distance = distance
-        }
+       if (issue.latitude === null || issue.longitude === null) issue.distance = null
+       else {
+           //console.log(issue)
+           const distance = DistanceCalculator.getDistanceInKilometers(curr.latitude, curr.longitude, issue.latitude, issue.longitude)
+           issue.distance = distance 
+           //console.log(distance)
+           const distSql = `INSERT INTO distances(issueid, userid, distance) VALUES (${issue.id}, ${userid[0].id}, ${distance}) ON DUPLICATE KEY UPDATE distance=${distance};`
+           const records = await db.query(distSql)
+       }
     }
+    
+    //console.log(issues)
+    return true
+}
+
+
+export async function getDistances(username) {
+    
+    console.log(username)
+    const userSql = `SELECT id FROM accounts WHERE user="${username}";`
+    const userid = await db.query(userSql)
+    console.log(userid)
+    
+    const sql = `SELECT i.id, i.title, i.location, i.currdate, i.photo, i.status, d.issueid, d.userid, d.distance FROM issues i LEFT JOIN distances d ON i.id = d.issueid WHERE d.userid = "${userid[0].id}";`
+    const issues = await db.query(sql)
     console.log(issues)
     return issues
 }

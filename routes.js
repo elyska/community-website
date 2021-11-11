@@ -8,7 +8,7 @@ import { Handlebars } from 'https://deno.land/x/handlebars/mod.ts'
 
 
 import { login, register } from './modules/accounts.js'
-import { addIssue, getIssues, getMyIssues, getIssueDetail } from './modules/issues.js'
+import { addIssue, getIssues, getMyIssues, getIssueDetail, updateFlag } from './modules/issues.js'
 
 //const handle = new Handlebars({ defaultLayout: '' })
 const handle = new Handlebars()
@@ -111,12 +111,9 @@ router.post('/login', async context => {
 
 router.post('/add', async context => {
 	console.log('POST /add')
-	const body = await context.request.body({ type: 'form-data', maxSize: 5000000 })
+	const body = context.request.body({ type: 'form-data', maxSize: 5000000 })
 	const value = await body.value.read()
     console.log(value)
-	//console.log(JSON.stringify(value, null, 2))
-    //console.log(value)
-    //const fields = value.fields
     let data = value.fields 
     const user = context.cookies.get("authorised")
     const file = value.files[0]
@@ -134,6 +131,26 @@ router.post('/add', async context => {
 	context.response.redirect('/')
 })
 
+router.post('/flag-as-fixed/:id', async context => {
+    console.log('POST /flag-as-fixed')
+    const issueId = context.params.id
+    console.log(issueId)
+    await updateFlag(issueId, "addressed")
+    /*
+    const body = context.request.body({ type: 'form' })
+    const value = await body.value
+    const obj = Object.fromEntries(value)
+    console.log(obj)*/
+    context.response.redirect(`/issues/${issueId}`)
+})
+
+router.post('/fix-confirmed/:id', async context => {
+    console.log('POST /fix-confirmed')
+    const issueId = context.params.id
+    console.log(issueId)
+    await updateFlag(issueId, "fixed")
+    context.response.redirect(`/issues/${issueId}`)
+})
 
 
 export default router

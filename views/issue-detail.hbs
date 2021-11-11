@@ -7,22 +7,29 @@
         <section>
         <h1>{{issue.title}}</h1> <!-- nt working, rename title -->
         <p>{{issue.username}} – {{convertDate issue.currdate}}</p>
-        <ul>
-            <li><strong>Location</strong></li>
-            <li>{{issue.location}}</li>
-            <li><strong>Description</strong> </li>
-            <li>{{issue.description}}</li>
-        </ul>
+        <dl>
+            <dt>Location</dt>
+            <dd>{{issue.location}}</dd>
+            <dt>Description</dt>
+            <dd><div>
+                {{{markdownConverter issue.description}}}
+                </div></dd>
+        </dl>
         <p>{{issue.status}}</p> 
         {{#if (equalsAddressed issue.status)}}
             {{#if issue.isMine}}
-                <a href="/fix-confirmed">Fix Confirmed</a>
+            <form method="post" action="/fix-confirmed/{{issue.id}}">
+                <input type="submit" value="Fix Confirmed">
+            </form>
             {{/if}}
         {{/if}}
             
         {{#if (equalsNew issue.status)}}
-            {{#unless issue.isMine}} 
-                <a href="/flag-as-fixed">Flag as fixed</a>
+            {{#unless issue.isMine}}
+            <form method="post" action="/flag-as-fixed/{{issue.id}}">
+                <!--<input type="hidden" name="id" value="issue.id">-->
+                <input type="submit" value="Flag as fixed">
+            </form>
             {{/unless}}
         {{/if}}
         </section>

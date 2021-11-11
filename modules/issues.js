@@ -37,6 +37,11 @@ export async function getIssueDetail(id) {
     let detail = issue[0]
     if (detail.photo === "placeholder.png") delete detail.photo
     detail.username = user[0].user
-    
     return detail
+}
+
+export async function updateFlag(id, status) {
+    const sql = `UPDATE issues SET status="${status}" WHERE id="${id}";`
+    const records = await db.query(sql)
+    return true
 }

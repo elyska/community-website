@@ -1,10 +1,8 @@
 /* Issue Page */
-strong {
-    color: var(--primary);
-}
 main {
     display: flex;
     flex-direction: column;
+    font-size: 20px;
 }
 
 main figure {
@@ -33,25 +31,13 @@ p {
     text-align: left;
 }
 
-main ul {
-    margin-left: 0 !important;
-    padding: 0;
-}
-
-main ul li {
-    font-family: Roboto !important;
-    list-style-image: none !important;
-    list-style-type: none !important;
-    margin-left: 0;
-}
-
-p:first-of-type {
+p:first-of-type:not(dl p) {
     opacity: 0.7;
     margin: 0 !important;
     font-size: 15px !important;
 }
 
-p:last-of-type {
+p:last-of-type:not(dl p) {
     font-size: 15px !important;
     border: 2px solid var(--primary);
     color: var(--primary);
@@ -64,7 +50,8 @@ p:last-of-type {
     float: right;
 }
 
-main a {
+input {
+    font-weight: normal;
     float: left;
     padding: 10px;
     padding-right: 20px;
@@ -74,8 +61,28 @@ main a {
     border: 2px solid var(--secondary) !important;
 }
 
-main a[href*="fix"]:hover {
-    border: 2px solid var(--secondary) !important;
+input:hover {
+    border: 2px solid var(--secondary);
     color: var(--secondary);
-    background-color: var(--background);  
+    background-color: var(--background) !important;  
+}
+
+/* markdown text style */
+dl {
+    font-size: 20px;
+}
+dt {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+dd {
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+dl h1, dl h2, dl h3 {
+    text-align: left;
+    font-family: Roboto;
 }

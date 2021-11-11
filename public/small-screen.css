@@ -257,6 +257,24 @@ main ul li:last-child {
     list-style-position: inside;
 }
 
+/*********** MY ISSUES PAGE ***************/
+main figure {
+    position: relative;
+}
+main figcaption {
+    font-size: 15px;
+    color: var(--background-lighter-variant);
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: var(--primary);
+    border-radius: 15px;
+}
+
 /********** LOGIN, REGISTER PAGE **********/
 main > p {
     text-align: center;

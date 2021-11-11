@@ -16,6 +16,7 @@
     <h2>New Issues</h2>
     <article>
         {{#each issues}}
+        {{#if (equalsNew status)}}
         <a href="/issues/{{id}}">
         <section>
                 <figure>
@@ -28,7 +29,7 @@
                  </ul>
             </section>
         </a>
-            
+        {{/if}}
         {{/each}}
               <!--   
             <section>

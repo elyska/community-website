@@ -2,7 +2,7 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 1.3vw !important;
+    /*font-size: 1.3vw !important;*/
 }
 main figure {
     width: 50%;
@@ -17,9 +17,9 @@ figure~section {
 }
 
 p:first-of-type {
-    font-size: 1vw !important;
+    /*font-size: 1vw !important;*/
 }
 
 p:last-of-type {
-    font-size: 1.2vw !important;
+    /*font-size: 1.2vw !important;*/
 }

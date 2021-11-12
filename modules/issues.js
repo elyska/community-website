@@ -14,6 +14,7 @@ export async function addIssue(user, data) {
     console.log(typeof latitude)
     const sql = `INSERT INTO issues(title, location, description, photo, userid, longitude, latitude) 
     VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid}, ${longitude}, ${latitude});`
+    /*const sql = `INSERT INTO issues(title, location, description, photo, userid) VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid});`*/
     const records = await db.query(sql)
     return true
 }
@@ -50,41 +51,18 @@ export async function updateFlag(id, status) {
     const records = await db.query(sql)
     return true
 }
-
-export async function addDistances(curr, username) {
-    //console.log(username)
-    const userSql = `SELECT id FROM accounts WHERE user="${username}";`
-    const userid = await db.query(userSql)
-    //console.log(userid)
-    
-    const sql = `SELECT id, latitude, longitude FROM issues WHERE status="new";`
-    const issues = await db.query(sql)
-    for (const issue of issues) {
-       if (issue.latitude === null || issue.longitude === null) issue.distance = null
-       else {
-           //console.log(issue)
-           const distance = DistanceCalculator.getDistanceInKilometers(curr.latitude, curr.longitude, issue.latitude, issue.longitude)
-           issue.distance = distance 
-           //console.log(distance)
-           const distSql = `INSERT INTO distances(issueid, userid, distance) VALUES (${issue.id}, ${userid[0].id}, ${distance}) ON DUPLICATE KEY UPDATE distance=${distance};`
-           const records = await db.query(distSql)
-       }
-    }
-    
-    //console.log(issues)
-    return true
-}
-
-
-export async function getDistances(username) {
-    
-    console.log(username)
-    const userSql = `SELECT id FROM accounts WHERE user="${username}";`
-    const userid = await db.query(userSql)
+/*
+export async function addCoords(user, coords) {
+    const userSql = `SELECT id FROM accounts WHERE user="${user}";`
+    let userid = await db.query(userSql)
+    userid = userid[0].id
     console.log(userid)
-    
-    const sql = `SELECT i.id, i.title, i.location, i.currdate, i.photo, i.status, d.issueid, d.userid, d.distance FROM issues i LEFT JOIN distances d ON i.id = d.issueid WHERE d.userid = "${userid[0].id}";`
-    const issues = await db.query(sql)
-    console.log(issues)
-    return issues
-}
+    console.log(coords)
+    const sglMax = `SELECT max(id) AS max FROM issues WHERE userid="${userid}";`
+    const maxId = await db.query(sglMax)
+    console.log(maxId[0].max)
+    const sql = `UPDATE issues SET latitude=${coords.latitude}, longitude=${coords.longitude} WHERE id = ${maxId[0].max};`
+    const records = await db.query(sql)
+    console.log(records)
+    return true
+}*/

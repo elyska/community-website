@@ -4,10 +4,9 @@ CREATE USER IF NOT EXISTS websiteuser IDENTIFIED BY 'websitepassword';
 GRANT INSERT, SELECT, UPDATE, DELETE ON website.* TO websiteuser;
 
 -- USE website;
-
-DROP TABLE IF EXISTS distances;
-DROP TABLE IF EXISTS issues;
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS issues;
 
 CREATE TABLE IF NOT EXISTS accounts (
   id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -16,7 +15,10 @@ CREATE TABLE IF NOT EXISTS accounts (
 );
 
 INSERT INTO accounts(user, pass)
-	VALUES("doej", "$2b$10$gL33obKAFUT5DK3pEbh72OIHztsWBniBBh.PdeKOrF1yr5KFAsdZO");
+	VALUES("doej", "$2b$10$gL33obKAFUT5DK3pEbh72OIHztsWBniBBh.PdeKOrF1yr5KFAsdZO"),
+    ("user1", "$2b$10$gL33obKAFUT5DK3pEbh72OIHztsWBniBBh.PdeKOrF1yr5KFAsdZO"),
+    ("user2", "$2b$10$gL33obKAFUT5DK3pEbh72OIHztsWBniBBh.PdeKOrF1yr5KFAsdZO"),
+    ("council", "$2b$10$gL33obKAFUT5DK3pEbh72OIHztsWBniBBh.PdeKOrF1yr5KFAsdZO");
 
 CREATE TABLE IF NOT EXISTS issues (
     id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -39,12 +41,3 @@ INSERT INTO issues(title, location, description, photo, userid)
     ("Issue Title 4", "Description of location 4", "Description", "placeholder.png", 1),
     ("Issue Title 5", "Description of location 5", "Description", "placeholder.png", 1);
     
-    
-CREATE TABLE IF NOT EXISTS distances (
-    issueid MEDIUMINT UNSIGNED NOT NULL,
-    userid MEDIUMINT UNSIGNED NOT NULL,
-    distance DOUBLE(10, 7),
-    PRIMARY KEY(issueid, userid),
-    FOREIGN KEY (userid) REFERENCES accounts(id),
-    FOREIGN KEY (issueid) REFERENCES issues(id)
-);

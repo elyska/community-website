@@ -11,6 +11,11 @@ const convertDate = (date) => {
     return newDate
 }
 
+const notNull = (value) => {
+    if (value !== null) return true
+    return false
+}
+
 const equalsNew = (status) => {
     if (status === "new") return true
     return false
@@ -24,7 +29,6 @@ const equalsAddressed = (status) => {
 const convertMarkdown = (description) => {
     // code based on https://deno.land/x/markdown@v2.0.0
     const markup = Marked.parse(description)
-    console.log(markup.content)
     // end of code based on https://deno.land/x/markdown@v2.0.0
     return markup.content
 }
@@ -33,6 +37,7 @@ export const helpers = {
     convertDate: convertDate,
     equalsNew: equalsNew,
     equalsAddressed: equalsAddressed,
-    convertMarkdown: convertMarkdown
+    convertMarkdown: convertMarkdown,
+    notNull: notNull
 }
 

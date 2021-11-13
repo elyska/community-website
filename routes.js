@@ -6,7 +6,6 @@ import { Handlebars } from 'https://deno.land/x/handlebars/mod.ts'
 // import { upload } from 'https://cdn.deno.land/oak_upload_middleware/versions/v2/raw/mod.ts'
 // import { parse } from 'https://deno.land/std/flags/mod.ts'
 
-
 import { login, register } from './modules/accounts.js'
 import { addIssue, getIssues, getMyIssues, getIssueDetail, updateFlag } from './modules/issues.js'
 
@@ -19,8 +18,9 @@ const router = new Router()
 router.get('/', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
-    //const issues = await getDistances(authorised)
-    const issues = await getIssues()
+    const latitude = context.cookies.get('latitude')
+    const longitude = context.cookies.get('longitude')
+    const issues = await getIssues(latitude, longitude)
     console.log(issues)
     const nav = true
 	const data = { authorised, nav, title: "Home", style: ["style"], issues }
@@ -48,12 +48,10 @@ router.get('/addissue', async context => {
 })
 
 router.get('/issues/:id', async context => {
-    console.log("here")
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const issue = await getIssueDetail(context.params.id)
     if (issue.username === authorised) issue.isMine = true
-    //console.log(issue)
     const nav = true
 	const data = { authorised, nav, title: "Add Issue", style: ["style", "issue"], issue }
 	const body = await handle.renderView('issue-detail', data)
@@ -113,7 +111,7 @@ router.post('/login', async context => {
 
 router.post('/add', async context => {
 	console.log('POST /add')
-	const body = context.request.body({ type: 'form-data', maxSize: 5000000 })
+	const body = context.request.body({ type: 'form-data' })
 	const value = await body.value.read()
     console.log(value)
     let data = value.fields 
@@ -125,12 +123,12 @@ router.post('/add', async context => {
         await Deno.rename(value.files[0].filename, `${Deno.cwd()}/public/uploads/${user}-${originalName}`)
         data.photo = `${user}-${originalName}`
     }
-    else 
-    {
+    else {
         data.photo = "placeholder.png"
     }
-    console.log("USER PASSED:")
-    console.log(user)
+    data.latitude = context.cookies.get("latitude")
+    data.longitude = context.cookies.get("longitude")
+    console.log(data)
     await addIssue(user, data)
 	context.response.redirect('/')
 })
@@ -155,18 +153,6 @@ router.post('/fix-confirmed/:id', async context => {
     await updateFlag(issueId, "fixed")
     context.response.redirect(`/issues/${issueId}`)
 })
-/*
-router.post('/issue-coords', async context => {
-    console.log('POST /issue-coords')
-	const user = context.cookies.get('authorised')
-	const body = context.request.body({ type: 'json' })
-	const value = await body.value
-    console.log(value)
-    await addCoords(user, value)
-    context.response.redirect('/')
-})
-*/
-
 
 
 export default router

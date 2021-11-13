@@ -19,9 +19,18 @@ export async function addIssue(user, data) {
     return true
 }
 
-export async function getIssues() {
+export async function getIssues(currLat, currLon) {
     const sql = `SELECT * FROM issues;`
     const issues = await db.query(sql)
+    for (const issue of issues) {
+        if (issue.latitude && issue.longitude && currLat && currLon) {
+            issue.distance = DistanceCalculator.getDistanceInKilometers(currLat, currLon, issue.latitude, issue.longitude)
+            issue.distance = Math.round(issue.distance * 1000)
+        }
+        else {
+            issue.distance = null
+        }
+    }
     return issues
 }
 
@@ -51,18 +60,3 @@ export async function updateFlag(id, status) {
     const records = await db.query(sql)
     return true
 }
-/*
-export async function addCoords(user, coords) {
-    const userSql = `SELECT id FROM accounts WHERE user="${user}";`
-    let userid = await db.query(userSql)
-    userid = userid[0].id
-    console.log(userid)
-    console.log(coords)
-    const sglMax = `SELECT max(id) AS max FROM issues WHERE userid="${userid}";`
-    const maxId = await db.query(sglMax)
-    console.log(maxId[0].max)
-    const sql = `UPDATE issues SET latitude=${coords.latitude}, longitude=${coords.longitude} WHERE id = ${maxId[0].max};`
-    const records = await db.query(sql)
-    console.log(records)
-    return true
-}*/

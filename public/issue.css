@@ -1,5 +1,6 @@
 
-
+/* style for issue detail page - smaller screen */
 @import url(./issue-small.css);
 
+/* style for issue detail page - larger screen */
 @import url(./issue-large.css) (min-width: 1150px);

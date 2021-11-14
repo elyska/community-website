@@ -1,72 +1,36 @@
 
 h1 {
-    font-size: 4vw;/*45px;*/
+    font-size: 4vw;
 }
 
 h2 {
-    font-size: 3vw;/*30px;*/
+    font-size: 3vw;
 }
 
 nav {
-    width: 100%;
-    margin: 0;
+    margin: auto;
     overflow: hidden;
+    text-align: right;
 }
 
-nav li:nth-child(2), nav li:nth-child(3) {
+
+nav figure {
     display: none !important;
 }
 
-nav li:nth-child(3) ~ li{
-    display: block !important;
-}
-
-nav ul {
-    margin: auto;
-    width: 80%;
-    /*
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row-reverse;*/
-        
-}
-
-nav ul li:first-child {
-    font-family: Crete, Arial, Helvetica, sans-serif;
-    font-size: 25px;
-    padding-top: 10px;
-    color: var(--primary);
-    float: left;
-}
-
-
-nav ul li:not(li:first-child) {
-    clear: none;
-    padding-left: 50px;
-    padding-top: 30px;
-    font-size: 20px;
-    float: right;
-}
-
-
-
-nav li a {
-    text-decoration: None;
-    padding-bottom: 5px;
-}
-
-nav li a img{
-    padding-right: 10px;
-    float: left;
+nav p {
     display: inline-block;
+    text-align: left;
 }
 
-
-
-nav li:not(nav li:first-child) a:hover img{
-    opacity: 0.6;
+nav ul{
+    display: inline-block !important;
 }
 
+nav li {
+    display: inline-block;
+    margin-left: 50px;
+}
 
 main {
     width: 80%;

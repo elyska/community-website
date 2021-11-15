@@ -125,8 +125,8 @@ router.post('/add', async context => {
     const { originalName, filename } = file
     // set photo to uploaded image or placeholder
     if (originalName != "") {
-        await Deno.rename(value.files[0].filename, `${Deno.cwd()}/public/uploads/${user}-${originalName}`)
-        data.photo = `${user}-${originalName}`
+        await Deno.rename(value.files[0].filename, `${Deno.cwd()}/public/uploads/${user}_${originalName}`)
+        data.photo = `${user}_${originalName}`
     }
     else {
         data.photo = "placeholder.png"

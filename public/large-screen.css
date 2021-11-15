@@ -25,7 +25,7 @@ h1~p {
     font-size: 20px;
 }
 
-img[src*="tree"] {
+article:first-child img[src="/uploads/tree-circle.svg"] {
     width: 40%;
     float: right;
     margin-bottom: -90px;

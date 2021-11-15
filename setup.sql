@@ -35,9 +35,14 @@ CREATE TABLE IF NOT EXISTS issues (
 );
 
 INSERT INTO issues(title, location, description, photo, userid) 
-    VALUES ("Issue Title 1", "Description of location 1", "Description", "placeholder.png", 1),
-    ("Issue Title 2", "Description of location 2", "Description", "placeholder.png", 1),
-    ("Issue Title 3", "Description of location 3", "Description", "placeholder.png", 1),
-    ("Issue Title 4", "Description of location 4", "Description", "placeholder.png", 1),
-    ("Issue Title 5", "Description of location 5", "Description", "placeholder.png", 1);
+    VALUES ("Stray Dog", "City Centre", "Description", "stray-dog.jpg", 3),
+    ("Bike in Coventry Canal", "Near Canal Basin", "There is an old bike under water.", "bike-under-water.jpg", 1),
+    ("Fallen Tree", "Description of location 2", "Description", "fallen-tree.jpg", 1),
+    ("Flooding Underpass", "Ring Road, Park Road", "Description", "flood.jpg", 1),
+    ("Covered Road Sign", "Description of location 4", "Description", "road-sign.jpg", 1),
+    ("Broken Fence", "Description of location 5", "Description", "fence.jpg", 2),
+    ("Deer", "Description of location 5", "Description", "deer.jpg", 2),
+    ("Abandoned Car", "Description of location 5", "Description", "abandoned-car.jpg", 3),
+    ("Rubbish in the Playground", "War Memorial Park", "Description", "rubbish.jpg", 1),
+    ("Nails, Screws and Sharp Objects on the Road", "Park Road", "Description", "nails.jpg", 1);
     

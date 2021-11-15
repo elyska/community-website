@@ -1,5 +1,6 @@
 <main>
     <article> 
+      {{#if issues}}
         {{#each issues}}
         <a href="/issues/{{id}}">
             <section>
@@ -15,5 +16,8 @@
             </section>
         </a>
         {{/each}}
+      {{else}}
+        <p>Nothing to display. To add an issue, go to home page and click Add Issue.</p>
+      {{/if}}
     </article>     
 </main>

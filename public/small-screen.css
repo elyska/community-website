@@ -286,6 +286,7 @@ form p {
 }
 
 input, textarea {
+    box-sizing: border-box;
     padding: 15px;
     padding-left: 10px;
     font-size: 15px;
@@ -304,12 +305,12 @@ input:focus, textarea:focus {
 input[type="submit"] {
     outline: none;  
     font-size: 20px;
-    width: 180px;
+    width: 150px;
     margin: 0;
 }
 
 form p:last-child {
-    width: 280px;
+    width: 250px;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -325,6 +326,18 @@ form p:last-child a {
 form p:last-child a:hover {
     text-decoration: none;
 }
+
+/* wrong username/password message */
+form[action="/login"] p:nth-child(3):not(:last-child) {
+    color: red;
+    background-color: pink;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 250px;
+    line-height: 30px;
+    border-radius: 3px;
+}
+
 /********** ADD ISSUE **********/
 
 form[action*="add"] input, textarea{

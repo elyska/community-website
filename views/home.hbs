@@ -1,5 +1,5 @@
 <main>
-    <article>
+   <article>
             <section>
                 <h1>Together <br />We Can Make <br />Coventry a&nbsp;Better Place</h1>
                 <p>
@@ -11,12 +11,12 @@
             <figure>
                 <img src="/uploads/tree-circle.svg" alt="Taking a photo of an issue" />
             </figure>
-    </article>
+   </article>
     
-    <h2>New Issues</h2>
-    <article>
+   <h2>New Issues</h2>
+   <article>
+      {{#if issues}}
         {{#each issues}}
-        {{#if (equalsNew status)}}
         <a href="/issues/{{id}}">
         <section>
                 <figure>
@@ -29,14 +29,13 @@
                     <li>{{title}}</li>
                     <li>{{location}}</li>
                     <li>{{convertDate currdate}}</li>
-                    <!--<li>{{latitude}}</li>
-                    <li>{{longitude}}</li>-->
                  </ul>
             </section>
         </a>
-        {{/if}}
         {{/each}}
-                
-    </article>
-   
+      {{else}}
+        <p>Nothing to display</p>
+      {{/if}}       
+   </article>
 </main>   
+<script type="module" src="/position.js"></script>

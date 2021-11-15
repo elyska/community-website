@@ -19,8 +19,8 @@ export async function addIssue(user, data) {
     return true
 }
 
-export async function getIssues(currLat, currLon) {
-    const sql = `SELECT * FROM issues;`
+export async function getNewIssues(currLat, currLon) {
+    const sql = `SELECT * FROM issues WHERE status="new";`
     const issues = await db.query(sql)
     for (const issue of issues) {
         if (issue.latitude && issue.longitude && currLat && currLon) {

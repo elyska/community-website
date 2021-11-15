@@ -51,6 +51,7 @@ main p:last-of-type:not(dl p) {
 }
 
 input {
+    width: fit-content !important;
     font-weight: normal;
     float: left;
     padding: 10px;
@@ -67,7 +68,6 @@ input:hover {
     background-color: var(--background) !important;  
 }
 
-/* markdown text style */
 dl {
     font-size: 20px;
     overflow-wrap: break-word;
@@ -86,8 +86,19 @@ dd {
 dd p:first-of-type {
     margin-top: 0;
 }
-
+/* markdown text style */
 dl h1, dl h2, dl h3 {
     text-align: left;
     font-family: Roboto;
+}
+dl ul li {
+    list-style-image: none !important;
+    list-style-type: disc !important;
+    list-style-position: outside !important;
+    font-family: Roboto !important;
+}
+table, th, td {
+    border: 1px solid var(--primary);
+    border-collapse: collapse;
+    padding: 10px;
 }

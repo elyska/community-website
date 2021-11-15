@@ -7,7 +7,7 @@ import { Handlebars } from 'https://deno.land/x/handlebars/mod.ts'
 // import { parse } from 'https://deno.land/std/flags/mod.ts'
 
 import { login, register } from './modules/accounts.js'
-import { addIssue, getIssues, getMyIssues, getIssueDetail, updateFlag } from './modules/issues.js'
+import { addIssue, getNewIssues, getMyIssues, getIssueDetail, updateFlag } from './modules/issues.js'
 
 //const handle = new Handlebars({ defaultLayout: '' })
 const handle = new Handlebars()
@@ -20,10 +20,10 @@ router.get('/', async context => {
 	if(authorised === undefined) context.response.redirect('/login')
     const latitude = context.cookies.get('latitude')
     const longitude = context.cookies.get('longitude')
-    const issues = await getIssues(latitude, longitude)
+    const issues = await getNewIssues(latitude, longitude)
     console.log(issues)
     const nav = true
-	const data = { authorised, nav, title: "Home", style: ["style"], issues }
+	const data = { authorised, nav, title: "Home", content: "Home page", style: ["style"], issues }
 	const body = await handle.renderView('home', data)
 	context.response.body = body
 })
@@ -33,7 +33,8 @@ router.get('/myissues', async context => {
 	if(authorised === undefined) context.response.redirect('/login')
     const issues = await getMyIssues(authorised)
     const nav = true
-	const data = { authorised, nav, title: "My Issues", style: ["style"], issues }
+    const content = "Page to display all issues submitted by the user"
+	const data = { authorised, nav, title: "My Issues", content, style: ["style"], issues }
 	const body = await handle.renderView('my-issues', data)
 	context.response.body = body
 })
@@ -42,7 +43,8 @@ router.get('/addissue', async context => {
 	const authorised = context.cookies.get('authorised')
 	if(authorised === undefined) context.response.redirect('/login')
     const nav = true
-	const data = { authorised, nav, title: "Add Issue", style: ["style"] }
+    const content = "Page with a form to submit an issue"
+	const data = { authorised, nav, title: "Add Issue", content, style: ["style"] }
 	const body = await handle.renderView('add-issue', data)
 	context.response.body = body
 })
@@ -53,7 +55,8 @@ router.get('/issues/:id', async context => {
     const issue = await getIssueDetail(context.params.id)
     if (issue.username === authorised) issue.isMine = true
     const nav = true
-	const data = { authorised, nav, title: "Add Issue", style: ["style", "issue"], issue }
+    const content = "Page describing an issue in detail"
+	const data = { authorised, nav, title: "Add Issue", content, style: ["style", "issue"], issue }
 	const body = await handle.renderView('issue-detail', data)
 	context.response.body = body
 })
@@ -63,7 +66,8 @@ router.get('/login', async context => {
     const url = context.request.url
     //code based on https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
     const searchParams = new URLSearchParams(url.search)
-    const data = { username: searchParams.get("username"), title: "Log In", style: ["style"]}
+    const content = "Page with a form asking for login details"
+    const data = { username: searchParams.get("username"), content, title: "Log In", style: ["style"]}
     //end of code based on https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
     console.log(data)
 	const body = await handle.renderView('login', data)
@@ -71,7 +75,8 @@ router.get('/login', async context => {
 })
 
 router.get('/register', async context => {
-    const data = { title: "Register", style: ["style"] }
+    const content = "Page with a form for a new user to regiester"
+    const data = { title: "Register", content, style: ["style"] }
 	const body = await handle.renderView('register', data)
 	context.response.body = body
 })
@@ -138,11 +143,6 @@ router.post('/flag-as-fixed/:id', async context => {
     const issueId = context.params.id
     console.log(issueId)
     await updateFlag(issueId, "addressed")
-    /*
-    const body = context.request.body({ type: 'form' })
-    const value = await body.value
-    const obj = Object.fromEntries(value)
-    console.log(obj)*/
     context.response.redirect(`/issues/${issueId}`)
 })
 

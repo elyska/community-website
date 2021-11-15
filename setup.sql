@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS issues (
     title VARCHAR(60) NOT NULL,
     location VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    photo VARCHAR(255) NOT NULL,
+    photo BLOB NOT NULL,
     currdate DATETIME DEFAULT CURRENT_TIMESTAMP,
     userid MEDIUMINT UNSIGNED NOT NULL,
     status VARCHAR(9) DEFAULT "new",

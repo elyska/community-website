@@ -3,20 +3,62 @@
 
 import {db} from "./db.js"
 import { DistanceCalculator } from "https://deno.land/x/distancecalculator/distance-calculator.ts"
+import Ajv from "../ajv.js"
 
 export async function addIssue(user, data) {
-    const userSql = `SELECT id FROM accounts WHERE user="${user}";`
-    let userid = await db.query(userSql)
-    userid = userid[0].id
-    const latitude = parseFloat(data.latitude)
-    const longitude = parseFloat(data.longitude)
-    console.log(latitude)
-    console.log(typeof latitude)
-    const sql = `INSERT INTO issues(title, location, description, photo, userid, longitude, latitude) 
-    VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid}, ${longitude}, ${latitude});`
-    /*const sql = `INSERT INTO issues(title, location, description, photo, userid) VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid});`*/
-    const records = await db.query(sql)
-    return true
+    data.latitude = parseFloat(data.latitude)
+    data.longitude = parseFloat(data.longitude)
+    
+    // validate data against JSON schema
+    const ajv = new Ajv({ allErrors: true })
+    const dataSchema = {
+        title: "Add Issue",
+        description: "JSON schema to validate data about an issue",
+        type: "object",
+        properties: {
+            
+            title: {
+                type: "string",
+                maxLength: 60
+            }, 
+            location: {
+                type: "string",
+                maxLength: 100
+            },
+            description: {
+                type: "string"
+            },
+            photo: {
+                type: "string"
+            },
+            longitude: {
+                type: "number"
+            },
+            latitude: {
+                type: "number"
+            }
+        }
+    }
+    
+    const validate = ajv.compile(dataSchema)
+    
+    try {
+        const valid = validate(data)
+        if (valid === false) throw validate.errors
+        console.log("ADD ISSUE OBJECT VALID")
+        
+        const userSql = `SELECT id FROM accounts WHERE user="${user}";`
+        let userid = await db.query(userSql)
+        userid = userid[0].id
+        const sql = `INSERT INTO issues(title, location, description, photo, userid, longitude, latitude) 
+        VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid}, ${data.longitude}, ${data.latitude});`
+        const records = await db.query(sql)
+        return true 
+    }
+    catch(err) {
+        console.log("ADD ISSUE OBJECT INVALID")
+        console.log(err)
+    }
 }
 
 export async function getNewIssues(currLat, currLon) {

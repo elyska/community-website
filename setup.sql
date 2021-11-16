@@ -1,7 +1,7 @@
 
 -- make sure the websiteuser account is set up and has the correct privileges
-CREATE USER IF NOT EXISTS websiteuser IDENTIFIED BY 'websitepassword';
-GRANT INSERT, SELECT, UPDATE, DELETE ON website.* TO websiteuser;
+-- CREATE USER IF NOT EXISTS websiteuser IDENTIFIED BY 'websitepassword';
+-- GRANT INSERT, SELECT, UPDATE, DELETE ON website.* TO websiteuser;
 
 -- USE website;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS issues (
     location VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     photo BLOB NOT NULL,
-    currdate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    currdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     userid MEDIUMINT UNSIGNED NOT NULL,
     status VARCHAR(9) DEFAULT "new",
     longitude DOUBLE(10, 7),

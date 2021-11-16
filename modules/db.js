@@ -14,10 +14,10 @@ const connectionData = {
     db: 'website'
   },
   '/app': {
-		hostname: 'HOSTNAME',
-    username: 'USERNAME',
-    password: 'PASSWORD',
-    db: 'DATABASE'
+	hostname: 'sql4.freesqldatabase.com',
+    username: 'sql4451553',
+    password: 'qB2GfErKe9',
+    db: 'sql4451553'
   }
 }
 

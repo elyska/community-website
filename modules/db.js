@@ -15,9 +15,9 @@ const connectionData = {
   },
   '/app': {
 	hostname: 'sql4.freesqldatabase.com',
-    username: 'sql4451553',
-    password: 'qB2GfErKe9',
-    db: 'sql4451553'
+    username: 'sql4451580',
+    password: '6r8nFAuK5x',
+    db: 'sql4451580'
   }
 }
 

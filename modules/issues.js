@@ -11,7 +11,6 @@ export async function addIssue(user, data) {
         data.latitude = null
         console.log("changed to null")
         console.log( data.longitude)*/
-
         data.latitude = parseFloat(data.latitude)
         data.longitude = parseFloat(data.longitude)
     }
@@ -44,10 +43,10 @@ export async function addIssue(user, data) {
                 type: ["number", "null"]
             }
         }
-    }
+    }/*
     console.log("data.longitude")
     console.log( data.longitude)
-    console.log(typeof data.longitude)
+    console.log(typeof data.longitude)*/
     const validate = ajv.compile(dataSchema)
     
     try {
@@ -59,18 +58,14 @@ export async function addIssue(user, data) {
         let userid = await db.query(userSql)
         userid = userid[0].id
         
-        if(data.latitude == undefined || data.latitude == undefined || data.latitude == null || data.latitude == null) {
-            const sql = `INSERT INTO issues(title, location, description, photo, userid) 
-        VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid});`
+        if(data.latitude == undefined || data.latitude == undefined) {
+            const sql = `INSERT INTO issues(title, location, description, photo, userid) VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid});`
             const records = await db.query(sql)
         }
         else {
-            const sql = `INSERT INTO issues(title, location, description, photo, userid, longitude, latitude) 
-        VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid}, ${data.longitude}, ${data.latitude});`
-        const records = await db.query(sql)
+            const sql = `INSERT INTO issues(title, location, description, photo, userid, longitude, latitude) VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid}, ${data.longitude}, ${data.latitude});`
+            const records = await db.query(sql)
         }
-        
-        
         return true 
     }
     catch(err) {

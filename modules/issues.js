@@ -44,10 +44,10 @@ export async function addIssue(user, data) {
     console.log(typeof data.longitude)
     const validate = ajv.compile(dataSchema)
     
-    try {/*
+    try {
         const valid = validate(data)
         if (valid === false) throw validate.errors
-        console.log("ADD ISSUE OBJECT VALID")*/
+        console.log("ADD ISSUE OBJECT VALID")
         
         const userSql = `SELECT id FROM accounts WHERE user="${user}";`
         let userid = await db.query(userSql)

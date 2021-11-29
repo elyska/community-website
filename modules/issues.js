@@ -32,10 +32,10 @@ export async function addIssue(user, data) {
                 type: "string"
             },
             longitude: {
-                type: "number"
+                type: ["number", "null"]
             },
             latitude: {
-                type: "number"
+                type: ["number", "null"]
             }
         }
     }

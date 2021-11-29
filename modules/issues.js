@@ -39,7 +39,9 @@ export async function addIssue(user, data) {
             }
         }
     }
-    
+    console.log("data.longitude")
+    console.log( data.longitude)
+    console.log(typeof data.longitude)
     const validate = ajv.compile(dataSchema)
     
     try {/*

@@ -30,13 +30,13 @@ export async function addIssue(user, data) {
             },
             photo: {
                 type: "string"
-            },
+            }/*,
             longitude: {
                 type: ["number", "null"]
             },
             latitude: {
                 type: ["number", "null"]
-            }
+            }*/
         }
     }
     console.log("data.longitude")

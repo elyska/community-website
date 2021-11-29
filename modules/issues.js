@@ -6,13 +6,12 @@ import { DistanceCalculator } from "https://deno.land/x/distancecalculator/dista
 import Ajv from "../ajv.js"
 
 export async function addIssue(user, data) {
-    if(data.latitude == undefined || data.latitude == undefined) {
+    if(data.latitude != undefined || data.latitude != undefined) {
         /*data.latitude = null
         data.latitude = null
         console.log("changed to null")
         console.log( data.longitude)*/
-    }
-    else {
+
         data.latitude = parseFloat(data.latitude)
         data.longitude = parseFloat(data.longitude)
     }
@@ -37,13 +36,13 @@ export async function addIssue(user, data) {
             },
             photo: {
                 type: "string"
-            }/*,
+            },
             longitude: {
                 type: ["number", "null"]
             },
             latitude: {
                 type: ["number", "null"]
-            }*/
+            }
         }
     }
     console.log("data.longitude")
@@ -60,7 +59,7 @@ export async function addIssue(user, data) {
         let userid = await db.query(userSql)
         userid = userid[0].id
         
-        if(data.latitude == undefined || data.latitude == undefined) {
+        if(data.latitude == undefined || data.latitude == undefined || data.latitude == null || data.latitude == null) {
             const sql = `INSERT INTO issues(title, location, description, photo, userid) 
         VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid});`
             const records = await db.query(sql)

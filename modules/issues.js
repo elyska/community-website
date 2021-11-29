@@ -7,10 +7,6 @@ import Ajv from "../ajv.js"
 
 export async function addIssue(user, data) {
     if(data.latitude != undefined || data.latitude != undefined) {
-        /*data.latitude = null
-        data.latitude = null
-        console.log("changed to null")
-        console.log( data.longitude)*/
         data.latitude = parseFloat(data.latitude)
         data.longitude = parseFloat(data.longitude)
     }
@@ -43,10 +39,7 @@ export async function addIssue(user, data) {
                 type: ["number", "null"]
             }
         }
-    }/*
-    console.log("data.longitude")
-    console.log( data.longitude)
-    console.log(typeof data.longitude)*/
+    }
     const validate = ajv.compile(dataSchema)
     
     try {

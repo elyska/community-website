@@ -7,10 +7,10 @@ import Ajv from "../ajv.js"
 
 export async function addIssue(user, data) {
     if(data.latitude == undefined || data.latitude == undefined) {
-        data.latitude = null
+        /*data.latitude = null
         data.latitude = null
         console.log("changed to null")
-        console.log( data.longitude)
+        console.log( data.longitude)*/
     }
     else {
         data.latitude = parseFloat(data.latitude)
@@ -59,9 +59,19 @@ export async function addIssue(user, data) {
         const userSql = `SELECT id FROM accounts WHERE user="${user}";`
         let userid = await db.query(userSql)
         userid = userid[0].id
-        const sql = `INSERT INTO issues(title, location, description, photo, userid, longitude, latitude) 
+        
+        if(data.latitude == undefined || data.latitude == undefined) {
+            const sql = `INSERT INTO issues(title, location, description, photo, userid) 
+        VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid});`
+            const records = await db.query(sql)
+        }
+        else {
+            const sql = `INSERT INTO issues(title, location, description, photo, userid, longitude, latitude) 
         VALUES ("${data.title}", "${data.location}", "${data.description}", "${data.photo}", ${userid}, ${data.longitude}, ${data.latitude});`
         const records = await db.query(sql)
+        }
+        
+        
         return true 
     }
     catch(err) {

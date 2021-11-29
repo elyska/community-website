@@ -8,7 +8,12 @@ import Ajv from "../ajv.js"
 export async function addIssue(user, data) {
     data.latitude = parseFloat(data.latitude)
     data.longitude = parseFloat(data.longitude)
-    
+    if(data.latitude == undefined || data.latitude == undefined) {
+        data.latitude = null
+        data.latitude = null
+    }
+    console.log("changed to null")
+    console.log( data.longitude)
     // validate data against JSON schema
     const ajv = new Ajv({ allErrors: true })
     const dataSchema = {
